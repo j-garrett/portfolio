@@ -11,9 +11,9 @@ const compat = new FlatCompat({
 
 export default defineConfig([
   {
+    extends: ['js/recommended'],
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: { js },
-    extends: ['js/recommended'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
@@ -31,8 +31,10 @@ export default defineConfig([
   }),
   {
     rules: {
-      'react/react-in-jsx-scope': 0,
+      'react/jsx-sort-props': 1,
       'react/jsx-uses-react': 0,
+      'react/react-in-jsx-scope': 0,
+      'sort-keys': 1,
     },
   },
 ])
