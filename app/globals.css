@@ -1,7 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 body {
   padding: 20px 20px 60px;
-  max-width: 680px;
+  max-width: 1200px;
   margin: 0 auto;
 }
