@@ -15,7 +15,6 @@ const Header = () => {
           <a href="https://github.com/j-garrett">GitHub</a>
         </div>
       </address>
-      <hr className="col-span-4" />
     </div>
   )
 }
