@@ -377,15 +377,14 @@ const JobContainer = ({ job }: { job: Job }) => (
   <div className="border-t-1 border-t-cyan-200">
     <div className="grid grid-cols-6">
       <div className="col-span-2 place-content-center text-2xl">
-        <p>{job.title}</p>
+        <p>{job.company}</p>
       </div>
       <div className="col-span-3 place-content-center">
-        <h3 className="text-2xl">{job.company}</h3>
+        <h3 className="text-2xl">{job.title}</h3>
       </div>
-      <div className="col-span-1 col-start-6 place-content-center italic">
-        <p>
-          {job.startDate} - {job.endDate}
-        </p>
+      <div className="col-span-1 col-start-6 place-content-center italic text-right">
+        <p>{job.startDate} -</p>
+        <p>{job.endDate}</p>
       </div>
     </div>
     <div className="border-t-1 border-t-cyan-100 pl-10">
