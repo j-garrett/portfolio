@@ -1,15 +1,8 @@
 import Image from 'next/image'
-import JobHistory from './components/job-history'
-// import Header from './components/header'
+import JobHistory from '../components/job-history'
 
 export default function Page() {
   return (
-    // <div className="grid grid-cols-9 gap-6">
-    //   <div className="col-span-1 bg-cyan-200"></div>
-    //   <div className="col-span-7">
-    //     <div className="pl-10">
-    //       <Header />
-    //     </div>
     <div>
       <JobHistory />
       <div className="border-t-1 border-t-cyan-500">
@@ -31,8 +24,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-    //   </div>
-    //   <div className="col-span-1 bg-cyan-200"></div>
-    // </div>
   )
 }

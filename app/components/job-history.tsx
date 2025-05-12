@@ -1,5 +1,5 @@
 'use client'
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -23,7 +23,7 @@ const skillsMap: Record<string, Skill> = {
   agile: { key: 'agile', label: 'Agile' },
   algorithms: { key: 'algorithms', label: 'Algorithms' },
   api: { key: 'api', label: 'API Design' },
-  'data-structures': { key: 'data-structures', label: 'Data Structures' },
+  // 'data-structures': { key: 'data-structures', label: 'Data Structures' },
   'drag-and-drop': { key: 'drag-and-drop', label: 'Drag and Drop' },
   drupal: { key: 'drupal', label: 'Drupal' },
   javascript: { key: 'javascript', label: 'JavaScript' },
@@ -80,6 +80,9 @@ const nextHealthJob: Job = {
   skills: [
     'agile',
     'api',
+    'javascript',
+    'jest',
+    'mentorship',
     'performance',
     'react',
     'react-hook-form',
@@ -148,33 +151,42 @@ const percolateJob: Job = {
 const spjSolutionsJob: Job = {
   company: 'SPJ Solutions',
   endDate: 'September 2018',
-  skills: ['api', 'drag-and-drop', 'nodejs', 'react', 'redux', 'testing'],
+  skills: [
+    'api',
+    'drag-and-drop',
+    'javascript',
+    'jest',
+    'nodejs',
+    'react',
+    'redux',
+    'testing',
+  ],
   startDate: 'December 2017',
   tasks: [
     {
       description:
         'First engineer on Citopus project after initial prototype was done with Django and jQuery. Turned into single page application using React and node.js, deployed it successfully to bare metal, and began growing Citopus team.',
-      tags: ['nodejs', 'react'],
+      tags: ['javascript', 'nodejs', 'react'],
     },
     {
       description:
         'Built node server to handle front end requests and store changes for safe resets when an operation failed.',
-      tags: ['nodejs'],
+      tags: ['javascript', 'nodejs'],
     },
     {
       description:
         "Used React with Redux to interface with VMware's SDK and API for automating monitoring and deployment of virtualized networking.",
-      tags: ['react', 'redux'],
+      tags: ['javascript', 'react', 'redux'],
     },
     {
       description:
         'Created smart forms to generate inputs with values based on previously entered information.',
-      tags: ['react', 'redux'],
+      tags: ['javascript', 'react', 'redux'],
     },
     {
       description:
         'Implemented drag and drop functionality to load configurations and extrapolate settings from targeted nodes.',
-      tags: ['drag-and-drop'],
+      tags: ['javascript', 'drag-and-drop'],
     },
   ],
   title: 'Lead Full Stack JavaScript Engineer',
@@ -299,26 +311,65 @@ const calculateSkillExperience = (() => {
   }
 })()
 
-const SkillButton = forwardRef<
-  HTMLButtonElement,
-  { skill: Skill; isSelected: boolean; onClick: () => void }
->(({ skill, isSelected, onClick }, ref) => (
-  <Tippy content={`${calculateSkillExperience(skill.key)} years of experience`}>
-    <button
-      className={`px-2 py-1 m-1 rounded ${
-        isSelected
-          ? 'bg-cyan-500 text-white'
-          : 'bg-cyan-200 text-cyan-900 hover:bg-cyan-300'
-      }`}
-      onClick={onClick}
-      ref={ref}
+const SkillButton = ({ skill, isSelected, onClick }) => {
+  return (
+    <Tippy
+      content={`${calculateSkillExperience(skill.key)} years of experience`}
     >
-      {skill.label}
-    </button>
-  </Tippy>
-))
+      <button
+        className={`px-2 py-1 m-1 rounded ${
+          isSelected
+            ? 'bg-cyan-500 text-white'
+            : 'bg-cyan-200 text-cyan-900 hover:bg-cyan-300'
+        }`}
+        onClick={onClick}
+      >
+        {skill.label}
+      </button>
+    </Tippy>
+  )
+}
 
-SkillButton.displayName = 'SkillButton'
+const JobContainer = ({
+  job,
+  selectedSkills,
+}: {
+  job: Job
+  selectedSkills: string[]
+}) => {
+  // Filter tasks based on selected skills
+  const filteredTasks = selectedSkills.length
+    ? job.tasks.filter((task) =>
+        task.tags.some((tag) => selectedSkills.includes(tag))
+      )
+    : job.tasks
+
+  return (
+    <div className="border-t-1 border-t-cyan-200">
+      <div className="grid grid-cols-6">
+        <div className="col-span-2 place-content-center text-2xl">
+          <p>{job.company}</p>
+        </div>
+        <div className="col-span-3 place-content-center">
+          <h3 className="text-2xl">{job.title}</h3>
+        </div>
+        <div className="col-span-1 col-start-6 place-content-center italic text-right">
+          <p>{job.startDate} -</p>
+          <p>{job.endDate}</p>
+        </div>
+      </div>
+      <div className="border-t-1 border-t-cyan-100 pl-10">
+        <ul>
+          {filteredTasks.map((task, index) => (
+            <li className="list-disc list-inside" key={index}>
+              {task.description}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 const JobHistory = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
@@ -367,36 +418,10 @@ const JobHistory = () => {
         </div>
       </div>
       {filteredJobs.map((job, index) => (
-        <JobContainer job={job} key={index} />
+        <JobContainer job={job} key={index} selectedSkills={selectedSkills} />
       ))}
     </div>
   )
 }
-
-const JobContainer = ({ job }: { job: Job }) => (
-  <div className="border-t-1 border-t-cyan-200">
-    <div className="grid grid-cols-6">
-      <div className="col-span-2 place-content-center text-2xl">
-        <p>{job.company}</p>
-      </div>
-      <div className="col-span-3 place-content-center">
-        <h3 className="text-2xl">{job.title}</h3>
-      </div>
-      <div className="col-span-1 col-start-6 place-content-center italic text-right">
-        <p>{job.startDate} -</p>
-        <p>{job.endDate}</p>
-      </div>
-    </div>
-    <div className="border-t-1 border-t-cyan-100 pl-10">
-      <ul>
-        {job.tasks.map((task, index) => (
-          <li className="list-disc list-inside" key={index}>
-            {task.description}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
-)
 
 export default JobHistory
