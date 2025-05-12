@@ -394,7 +394,7 @@ const JobHistory = () => {
     : jobList
 
   return (
-    <div className="grid border-t-1 border-t-cyan-500">
+    <div>
       <h2 className="text-4xl pl-5">Job History</h2>
       <div className="border-t-1 border-t-cyan-300 pl-5">
         <h3 className="text-2xl">Skills</h3>

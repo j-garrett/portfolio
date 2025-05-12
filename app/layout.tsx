@@ -16,18 +16,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="flex text-cyan-900">
-        <Sidebar />
-        <div className="grid grid-cols-9 gap-6">
-          <div className="col-span-1 bg-cyan-200"></div>
-          <div className="col-span-7">
+    <html className="min-h-full bg-cyan-200" lang="en">
+      <body className="min-h-full text-cyan-900">
+        <div className="grid grid-cols-12 min-h-full">
+          <div className="col-span-3 flex">
+            <Sidebar />
+          </div>
+          <div className="col-span-1"></div>
+          <div className="col-span-7 bg-white p-3">
             <div className="pl-10">
               <Header />
             </div>
-            {children}
+            <div className="border-t-1 border-t-cyan-500">{children}</div>
           </div>
-          <div className="col-span-1 bg-cyan-200"></div>
+          {/* <div className="col-span-1">watercolors found: 0/1</div> */}
         </div>
       </body>
     </html>
