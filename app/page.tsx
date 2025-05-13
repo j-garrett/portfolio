@@ -47,8 +47,8 @@ export default function Page() {
             <p>
               Take a quick look at some of my recent{' '}
               <Link href="/projects">projects</Link> to see what I&apos;ve been
-              up to recently. I also have a <Link href="/blog">blog</Link> with
-              some project specific ramblings.
+              up to. I also have a <Link href="/blog">blog</Link> with some
+              project specific ramblings.
             </p>
             <p>
               This site continues to be a work in progress. I know how to
