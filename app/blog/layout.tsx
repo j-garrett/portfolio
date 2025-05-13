@@ -1,4 +1,4 @@
-import { getAllPosts, sortPostsByDate } from '../lib/posts'
+import { getAllPosts, sortPostsByAscendingDate } from '../lib/posts'
 import { BlogProvider } from './blog-context'
 
 export default async function BlogLayout({
@@ -6,7 +6,20 @@ export default async function BlogLayout({
 }: {
   children: React.ReactNode
 }) {
-  const posts = sortPostsByDate(getAllPosts('portfolio'))
+  // TODO: add blog topics for portfolio and scavenger-hunt
+  const portfolioBlog = sortPostsByAscendingDate(getAllPosts('portfolio'))
+  const scavengerHuntBlog = sortPostsByAscendingDate(
+    getAllPosts('scavenger-hunt')
+  )
 
-  return <BlogProvider posts={posts}>{children}</BlogProvider>
+  const posts = {
+    portfolio: portfolioBlog,
+    'scavenger-hunt': scavengerHuntBlog,
+  }
+
+  return (
+    <div className="max-w-200 m-auto">
+      <BlogProvider posts={posts}>{children}</BlogProvider>
+    </div>
+  )
 }

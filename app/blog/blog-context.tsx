@@ -1,9 +1,12 @@
 'use client'
 import React, { createContext, useContext } from 'react'
 import { IPost } from '../lib/posts'
+import { BlogSubDirectories } from './page'
 
 interface BlogContextProps {
-  posts: IPost[]
+  posts: {
+    [key in BlogSubDirectories]: IPost[]
+  }
 }
 
 const BlogContext = createContext<BlogContextProps | undefined>(undefined)

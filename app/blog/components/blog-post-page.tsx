@@ -2,22 +2,24 @@ import { getPostBySlug } from '../../lib/posts'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import PageHeader from '../../components/page-header'
-import BlogFooter from '../components/blog-footer'
-import MainContainer from '../../components/main-container'
+import BlogFooter from './blog-footer'
+import Image from 'next/image'
+import { BlogSubDirectories } from '../page'
 
-export default async function Page({
-  params,
+export default async function BlogPostPage({
+  subDirectory,
+  slug,
 }: {
-  params: Promise<{ slug: string }>
+  slug: string
+  subDirectory: BlogSubDirectories
 }) {
-  const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = getPostBySlug(subDirectory, slug)
   return (
-    <div>
+    <div className="pt-5">
       <PageHeader header={post.metadata.title} />
-      <MainContainer>
+      <div className="pt-5">
         <Markdown
-          // custom components can be mapped here as well
+          // map custom components to tailwind classes
           components={{
             h1: ({ children, ...props }) => (
               <h1 className="text-4xl" {...props}>
@@ -34,6 +36,20 @@ export default async function Page({
                 {children}
               </h3>
             ),
+            img: ({ src, alt, ...props }) => {
+              console.log('src', src)
+              console.log('alt', alt)
+              return (
+                <Image
+                  {...props}
+                  alt={alt}
+                  className="m-auto pt-5"
+                  height={500}
+                  src={`/${src}`}
+                  width={500}
+                />
+              )
+            },
             li: ({ children, ...props }) => (
               <li className="" {...props}>
                 {children}
@@ -59,8 +75,8 @@ export default async function Page({
         >
           {post.content}
         </Markdown>
-        <BlogFooter slug={slug} />
-      </MainContainer>
+        <BlogFooter slug={slug} subDirectory={subDirectory} />
+      </div>
     </div>
   )
 }
