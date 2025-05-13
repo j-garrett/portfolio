@@ -1,34 +1,40 @@
 'use client'
 import Link from 'next/link'
 import { useBlogContext } from '../blog-context'
+import { BlogSubDirectories } from '../page'
 
-export default function BlogFooter({ slug }: { slug: string }) {
+export default function BlogFooter({
+  slug,
+  subDirectory,
+}: {
+  slug: string
+  subDirectory: BlogSubDirectories
+}) {
   const { posts } = useBlogContext()
-  const currentIndex = posts.findIndex((p) => p.slug === slug)
-  const previousPost = posts[currentIndex - 1] || null
-  const nextPost = posts[currentIndex + 1] || null
+  const sectionPosts = posts[subDirectory]
+  const currentIndex = sectionPosts.findIndex((p) => p.slug === slug)
+  const previousPost = sectionPosts[currentIndex - 1] || null
+  const nextPost = sectionPosts[currentIndex + 1] || null
 
   return (
     <div className="border-t-1 border-b-1 border-cyan-500">
-      <div className="grid grid-cols-3 gap-4 h-20 items-center">
+      <div className="grid grid-cols-3 gap-4 h-20 items-center text-cyan-700">
         {previousPost && (
-          <div className="">
-            <Link href={`/blog/${previousPost.slug}`}>
-              <p className="text-cyan-700 hover:underline ">
-                {'<--'} Previous Post {previousPost.metadata.title}
-              </p>
+          <div className="hover:underline ">
+            <Link href={`/blog/${subDirectory}/${previousPost.slug}`}>
+              <p>{'<--'} Previous Post</p>
+              <p>{previousPost.metadata.title}</p>
             </Link>
           </div>
         )}
-        <div className="col-start-2 place-self-center">
+        <div className="col-start-2 place-self-center hover:underline ">
           <Link href="/blog">Blog</Link>
         </div>
         {nextPost && (
-          <div className="col-start-3">
-            <Link href={`/blog/${nextPost.slug}`}>
-              <p className="text-cyan-700 hover:underline place-self-end">
-                Next Post {'-->'} {nextPost.metadata.title}
-              </p>
+          <div className="col-start-3 text-cyan-700 hover:underline ">
+            <Link href={`/blog/${subDirectory}/${nextPost.slug}`}>
+              <p className="place-self-end">Next Post {'-->'}</p>
+              <p className="place-self-end">{nextPost.metadata.title}</p>
             </Link>
           </div>
         )}

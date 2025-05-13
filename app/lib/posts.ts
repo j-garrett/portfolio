@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-
-let postsDirectory
+import { BlogSubDirectories } from '../blog/page'
 
 export interface IMetaData {
   title: string
@@ -15,14 +14,18 @@ export interface IPost {
   slug: string
 }
 
-export const sortPostsByDate = (posts: IPost[]) =>
+export const sortPostsByAscendingDate = (posts: IPost[]) =>
   posts.sort(
     (a, b) =>
-      new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
+      new Date(a.metadata.date).getTime() - new Date(b.metadata.date).getTime()
   )
 
-export function getAllPosts(directory: string): Array<IPost> {
-  postsDirectory = path.join(process.cwd(), `public/content/blog`, directory)
+export function getAllPosts(directory: BlogSubDirectories): Array<IPost> {
+  const postsDirectory = path.join(
+    process.cwd(),
+    `public/content/blog`,
+    directory
+  )
   const fileNames = fs.readdirSync(postsDirectory)
 
   return fileNames.map((fileName) => {
@@ -44,11 +47,14 @@ export function getAllPosts(directory: string): Array<IPost> {
   })
 }
 
-export function getPostBySlug(slug: string) {
-  if (!postsDirectory) {
-    throw new Error('postsDirectory is not set. Call getAllPosts first.')
-  }
-  const fullPath = path.join(postsDirectory, `${slug}.md`)
+export function getPostBySlug(subDirectory: BlogSubDirectories, slug: string) {
+  const postsDirectory = path.join(
+    process.cwd(),
+    `public/content/blog`,
+    subDirectory,
+    `${slug}.md`
+  )
+  const fullPath = path.join(postsDirectory)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
