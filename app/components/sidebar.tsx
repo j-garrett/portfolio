@@ -7,7 +7,6 @@ const LargeNavUL = ({ children }: { children: React.ReactNode }) => {
       <ul
         className="
           inline-block
-          scale-110
           skew-y-12
           antialiased
           rotate-y-45
@@ -48,13 +47,23 @@ const LargeNavUL = ({ children }: { children: React.ReactNode }) => {
 export default function Sidebar() {
   return (
     <aside className="w-full pl-3">
-      <nav className="pt-20">
+      <nav className="pt-30">
         <LargeNavUL>
-          <Link href="/">Home</Link>
-          <Link href="/resume">Resume</Link>
-          <Link href="/projects">Projects</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/blog">Blog</Link>
+          <Link className="no-underline" href="/">
+            Home
+          </Link>
+          <Link className="no-underline" href="/resume">
+            Resume
+          </Link>
+          <Link className="no-underline" href="/projects">
+            Projects
+          </Link>
+          <Link className="no-underline" href="/contact">
+            Contact
+          </Link>
+          <Link className="no-underline" href="/blog">
+            Blog
+          </Link>
         </LargeNavUL>
       </nav>
     </aside>

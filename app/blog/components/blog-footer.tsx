@@ -28,7 +28,7 @@ export default function BlogFooter({
           </div>
         )}
         <div className="col-start-2 place-self-center hover:underline ">
-          <Link href="/blog">Blog</Link>
+          <Link href="/blog">Blog Home</Link>
         </div>
         {nextPost && (
           <div className="col-start-3 text-cyan-700 hover:underline ">

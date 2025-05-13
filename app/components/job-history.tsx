@@ -3,6 +3,7 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import PageHeader from '../components/page-header'
 
 interface Skill {
   key: string
@@ -347,15 +348,15 @@ const JobContainer = ({
   return (
     <div className="border-t-1 border-t-cyan-200">
       <div className="grid grid-cols-6">
-        <div className="col-span-2 place-content-center text-2xl">
-          <p>{job.company}</p>
+        <div className="col-span-2 place-content-center text-lg">
+          {job.company}
         </div>
         <div className="col-span-3 place-content-center">
-          <h3 className="text-2xl">{job.title}</h3>
+          <h3>{job.title}</h3>
         </div>
         <div className="col-span-1 col-start-6 place-content-center italic text-right">
-          <p>{job.startDate} -</p>
-          <p>{job.endDate}</p>
+          <p className="indent-0 pt-0">{job.startDate} -</p>
+          <p className="indent-0 pt-0">{job.endDate}</p>
         </div>
       </div>
       <div className="border-t-1 border-t-cyan-100 pl-10">
@@ -395,9 +396,9 @@ const JobHistory = () => {
 
   return (
     <div>
-      <h2 className="text-4xl pl-5">Job History</h2>
+      <PageHeader header="Job History" />
       <div className="border-t-1 border-t-cyan-300 pl-5">
-        <h3 className="text-2xl">Skills</h3>
+        <h2>Skills</h2>
         <div className="flex flex-wrap justify-between">
           {Object.values(skillsMap).map((skill) => (
             <SkillButton

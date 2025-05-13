@@ -21,21 +21,6 @@ export default async function BlogPostPage({
         <Markdown
           // map custom components to tailwind classes
           components={{
-            h1: ({ children, ...props }) => (
-              <h1 className="text-4xl" {...props}>
-                {children}
-              </h1>
-            ),
-            h2: ({ children, ...props }) => (
-              <h2 className="text-3xl" {...props}>
-                {children}
-              </h2>
-            ),
-            h3: ({ children, ...props }) => (
-              <h3 className="text-2xl" {...props}>
-                {children}
-              </h3>
-            ),
             img: ({ src, alt, ...props }) => {
               console.log('src', src)
               console.log('alt', alt)
@@ -59,11 +44,6 @@ export default async function BlogPostPage({
               <ol className="list-disc pl-5" {...props}>
                 {children}
               </ol>
-            ),
-            p: ({ children, ...props }) => (
-              <p className="indent-8 pt-5" {...props}>
-                {children}
-              </p>
             ),
             ul: ({ children, ...props }) => (
               <ul className="list-disc pl-5" {...props}>

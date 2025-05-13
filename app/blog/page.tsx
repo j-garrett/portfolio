@@ -19,7 +19,7 @@ export default function Page() {
       <MainContainer>
         {blogSections.map((section) => (
           <div key={section.slug}>
-            <h3 className="text-2xl">{section.name}</h3>
+            <h3>{section.name}</h3>
             <ul className="list-disc pl-5">
               {posts[section.slug].map((post) => (
                 <li className="text-cyan-700 hover:underline" key={post.slug}>
