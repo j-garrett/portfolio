@@ -1,9 +1,10 @@
 import MainContainer from '../components/main-container'
+import PageHeader from '../components/page-header'
 
 export default function Page() {
   return (
     <div>
-      <h2 className="text-4xl pl-5">Contact</h2>
+      <PageHeader header="Contact" />
       <MainContainer>
         <address>
           <div className="content-center">

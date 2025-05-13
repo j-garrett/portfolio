@@ -18,6 +18,24 @@
 
 body {
   font-family: 'FiraCode', sans-serif;
-  /* max-width: 1200px; */
   margin: 0 auto;
+}
+
+@layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  h3 {
+    font-size: var(--text-lg);
+  }
+  a {
+    text-decoration-line: underline;
+  }
+  p {
+    padding-top: 1rem;
+    text-indent: calc(var(--spacing) * 8);
+  }
 }
