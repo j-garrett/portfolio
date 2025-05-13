@@ -58,9 +58,9 @@ export default function Sidebar() {
           <Link className="no-underline" href="/projects">
             Projects
           </Link>
-          <Link className="no-underline" href="/contact">
+          {/* <Link className="no-underline" href="/contact">
             Contact
-          </Link>
+          </Link> */}
           <Link className="no-underline" href="/blog">
             Blog
           </Link>

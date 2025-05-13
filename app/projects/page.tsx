@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import MainContainer from '../components/main-container'
 import PageHeader from '../components/page-header'
+import Image from 'next/image'
 
 export default function Page() {
   return (
@@ -67,6 +68,12 @@ export default function Page() {
             Squarevania
           </Link>
         </h3>
+        <Image
+          alt="Squarevania: accurate hitboxes are hard"
+          height={300}
+          src="/squarevania-hitboxes.png"
+          width={400}
+        />
         <p>
           I had some time recently to play one of my favorite video game genres:
           Metroidvanias. I decided to try to build on with Phaser.js and see if
@@ -75,6 +82,7 @@ export default function Page() {
           <Link href="https://github.com/j-garrett/squarevania">GitHub</Link> so
           you can always download it to play it locally.
         </p>
+        <p>Accurate hitboxes are hard!</p>
       </MainContainer>
     </div>
   )
